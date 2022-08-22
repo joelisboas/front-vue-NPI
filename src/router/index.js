@@ -6,17 +6,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'Create New User',
-      component: () => import('../components/create-user/CreateUserComponent')
+      component: () => import('../components/create-user/CreateUserComponent.vue')
     },
     {
       path: '/list-user',
       name: 'List Users',
-      component: () => import('../components/list-user/ListUserComponent')
+      component: () => import('../components/list-user/ListUserComponent.vue')
     },
     {
       path: '/edit-user/:id',
       name: 'Update User',
-      component: () => import('../components/edit-user/EditUserComponent')
+      component: () => import('../components/edit-user/EditUserComponent.vue')
     }
   ]
 })

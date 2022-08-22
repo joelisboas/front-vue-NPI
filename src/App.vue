@@ -1,5 +1,6 @@
 <script setup>
-
+import { RouterLink, RouterView } from 'vue-router'
+import Create from './components/create-user/CreateUserComponent.vue'
 </script>
 
 <template>
