@@ -4,18 +4,18 @@
             <div class="card-header">
                 <h3>Adicionar Tarefa</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body ">
                 <form @submit.prevent="salvar">
                     <div class="form-group">
-                        <label for="" class="font-weight-bold">Título</label>
+                        <label for="" class="font-weight-bold form-label">Título</label>
                         <input type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="data.data.title">
                     </div>
                     <div class="form-group">
-                        <label for="" class="font-weight-bold">Descrição</label>
+                        <label for="" class="font-weight-bold form-label">Descrição</label>
                         <input type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="data.data.description">
                     </div>
                     <div class="form-group">
-                        <label for="" class="font-weight-bold">Prazo de Entrega</label>
+                        <label for="" class="font-weight-bold form-label">Prazo de Entrega</label>
                         <input type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="data.data.deadline">
                     </div>
                     <div class="form-group">
@@ -52,7 +52,7 @@ export default{
         salvar(){
             Task.addNewTask(this.data)
                 .then(response => {
-                    alert('Tarefa adicionada com sucesso')
+                    alert ('Tarefa adicionada com sucesso')
                 })
                 .catch(error => console.log(error))
         }
