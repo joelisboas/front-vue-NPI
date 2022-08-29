@@ -1,6 +1,7 @@
 <template>
+
   <div id="id1" class="container app"> 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar navbar-dark bg-primary navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand order-md-last">AUTO ESTUDO</a>
         <ul class="navbar-nav mr-auto">
@@ -23,9 +24,9 @@
 
 <style>
 
-.app {
+/* .app {
   background-color:blanchedalmond;
-}
+} */
 
 #id1{
   max-width: 100%;

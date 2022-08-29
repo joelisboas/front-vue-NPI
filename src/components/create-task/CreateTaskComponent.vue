@@ -6,17 +6,17 @@
             </div>
             <div class="card-body ">
                 <form @submit.prevent="salvar">
-                    <div class="form-group">
-                        <label for="" class="font-weight-bold form-label">Título</label>
-                        <input type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="data.data.title">
+                    <div class="form-group form-floating mb-3">
+                        <input id="floatingInput" type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="data.data.title">
+                        <label for="floatingInput">Título</label>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="font-weight-bold form-label">Descrição</label>
-                        <input type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="data.data.description">
+                    <div class="form-group form-floating mb-3">
+                        <input id="floatingInput" type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="data.data.description">
+                        <label for="floatingInput" class="font-weight-bold form-label">Descrição</label>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="font-weight-bold form-label">Prazo de Entrega</label>
-                        <input type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="data.data.deadline">
+                    <div class="form-group form-floating mb-3">
+                        <input id="floatingInput" type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="data.data.deadline">
+                        <label for="floatingInput" class="font-weight-bold form-label">Prazo de Entrega</label>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Adicionar</button>
@@ -29,6 +29,7 @@
 
 <script>
 
+import Swal from 'sweetalert2';
 import Task from './../../services/tasks'
 
 export default{
@@ -39,9 +40,9 @@ export default{
         return{
             data: {
                 "data": {
-                "title": "",
-                "description": "",
-                "deadline": "",
+                    "title": "",
+                    "description": "",
+                    "deadline": "",
                 }
             },
         }
@@ -52,9 +53,12 @@ export default{
         salvar(){
             Task.addNewTask(this.data)
                 .then(response => {
-                    alert ('Tarefa adicionada com sucesso')
                 })
-                .catch(error => console.log(error))
+            Swal.fire(
+                'Adicionado!',
+                'Tarefa adicionada com sucesso!',
+                'success',
+            )
         }
     },
 }

@@ -10,12 +10,14 @@ export default{
         return api.post('tasks', data);
     },
 
-    updateTask:(data) => {
-        return api.put('tasks', data);
+    updateTask:(id) => {
+        return api.put('tasks/'+id);
     },
 
-    deleteTask:(data) => {
-        return api.delete('tasks', {data:data})
+    deleteTask:(id) => {
+        return api.delete('tasks/'+id)
     }
 
 }
+
+// /${dataId}

@@ -13,11 +13,7 @@ const router = createRouter({
       name: 'List tasks',
       component: () => import('../components/list-task/ListTaskComponent.vue')
     },
-    {
-      path: '/edit-task/:id',
-      name: 'Update task',
-      component: () => import('../components/edit-task/EditTaskComponent.vue')
-    }
+    
   ]
 })
 
