@@ -5,18 +5,18 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Create New User',
-      component: () => import('../components/create-user/CreateUserComponent.vue')
+      name: 'Create New Task',
+      component: () => import('../components/create-task/CreateTaskComponent.vue')
     },
     {
-      path: '/list-user',
-      name: 'List Users',
-      component: () => import('../components/list-user/ListUserComponent.vue')
+      path: '/list-task',
+      name: 'List tasks',
+      component: () => import('../components/list-task/ListTaskComponent.vue')
     },
     {
-      path: '/edit-user/:id',
-      name: 'Update User',
-      component: () => import('../components/edit-user/EditUserComponent.vue')
+      path: '/edit-task/:id',
+      name: 'Update task',
+      component: () => import('../components/edit-task/EditTaskComponent.vue')
     }
   ]
 })

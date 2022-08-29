@@ -5,12 +5,12 @@
         <a class="navbar-brand order-md-last">NAV BAR</a>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/">+ Novo Usuário</router-link>
+            <router-link class="nav-link" to="/">+ Nova Tarefa</router-link>
           </li>
         </ul>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/list-user">Lista de Usuários</router-link>
+            <router-link class="nav-link" to="/list-task">Lista de Tarefas</router-link>
           </li>
         </ul>
       </div>
