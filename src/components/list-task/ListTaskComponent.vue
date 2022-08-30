@@ -17,40 +17,71 @@
                 <tr v-for= "data of data" v-bind:key="data.id">
                     <td scope="row">{{data.id}}</td>
                     <td>plano de estagio{{data.title}}</td>
-                    <td>entregar plano de estagio</td>
+                    <td>plano de estagio{{data.description}}</td>
                     <td>2022-08-30</td>
-                    <td><button @click="editar(data.id)" type="button" class="btn btn-outline-primary">Editar</button></td>
+                    <td><button @click="clickEdit(data.attributes)" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button></td>
                     <td><button @click="deletar(data.id)" type="button" class="btn btn-outline-danger">Deletar</button></td>
                 </tr>
             </tbody>
-        </table>
-        <!-- <button v-b-modal.modal-editar >CLIC</button>
-        <modal id="modal-editar" title="BootstrapVue">MODAL</modal> -->
+        </table>        
     </div>
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form @submit.prevent="salvar">
+                        <div class="form-group form-floating mb-3">
+                            <input id="floatingInput" type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="data.title">
+                            <label for="floatingInput">Título</label>
+                        </div>
+                        <div class="form-group form-floating mb-3">
+                            <input id="floatingInput" type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="data.description">
+                            <label for="floatingInput" class="font-weight-bold form-label">Descrição</label>
+                        </div>
+                        <div class="form-group form-floating mb-3">
+                            <input id="floatingInput" type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="data.deadline">
+                            <label for="floatingInput" class="font-weight-bold form-label">Prazo de Entrega</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer form-group">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button @click="editar(data.attributes)" class="btn btn-primary" type="submit">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 
 
 </template>
 
-<script>
+<script >
 
 import Swal from 'sweetalert2';
 import Task from './../../services/tasks'
 
 export default{
     data() {
-        
-        
+
         return{
-            
             
             data: {
                 "data": {
+                    "id": "",
                     "title": "",
                     "description": "",
                     "deadline": "",
                 }
             }
+
         };
     },
 
@@ -65,19 +96,25 @@ export default{
                 // this.data = JSON.stringify(response.data)
                 // console.log(response.data.data)
                 this.data = response.data.data
-                // console.log(this.data)
+                // this.title = response.data.data.attributes
+                // console.log(data)
             })
             .catch(error => console.log(error))
         },
         
-        editar(id){
-            Task.updateTask(id)
+        editar(item){
+            Task.updateTask(item)
             .then(response => {
-                this.data= data
-                console.log(response.data.id)
+            this.data= data.data
+            console.log(response.data)
             })
-
         },
+
+        clickEdit(item){
+                this.data = item
+                console.log(item)
+        },
+            
 
         deletar(id){
 
@@ -109,15 +146,10 @@ export default{
     }
 }
 
-// Vue.component('modal', {
-//     template: '#modal-template'
-// })
-
-// new Vue({
-//     el: '#app',
-//     data: {
-//         showModal: false
-//     }
+// new Vue({ el: '#components-demo',
+//   data:{
+//     showModel:false    
+//   }
 // })
 
 </script>
