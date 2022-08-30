@@ -24,10 +24,6 @@
 
 <style>
 
-/* .app {
-  background-color:blanchedalmond;
-} */
-
 #id1{
   max-width: 100%;
   padding: 0;

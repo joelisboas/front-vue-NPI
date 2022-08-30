@@ -14,13 +14,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for= "data of data" v-bind:key="data.id">
-                    <td scope="row">{{data.id}}</td>
-                    <td>plano de estagio{{data.title}}</td>
-                    <td>plano de estagio{{data.description}}</td>
-                    <td>2022-08-30</td>
-                    <td><button @click="clickEdit(data.attributes)" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button></td>
-                    <td><button @click="deletar(data.id)" type="button" class="btn btn-outline-danger">Deletar</button></td>
+                <tr v-for= "task in tasks" v-bind:key="task.id">
+                    <td scope="row">{{task.id}}</td>
+                    <td scope="row">{{task.attributes ? task.attributes.title : 'Ainda ñ carregou'}}</td>
+                    <td>{{task.description}}</td>
+                    <td>{{task.deadline}}</td>
+                    <td><button @click="clickEdit(task)" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button></td>
+                    <td><button @click="deletar(task.id)" type="button" class="btn btn-outline-danger">Deletar</button></td>
                 </tr>
             </tbody>
         </table>        
@@ -37,29 +37,27 @@
                 <div class="modal-body">
                     <form @submit.prevent="salvar">
                         <div class="form-group form-floating mb-3">
-                            <input id="floatingInput" type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="data.title">
+                            <input id="floatingInput" type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="tasks.title">
                             <label for="floatingInput">Título</label>
                         </div>
                         <div class="form-group form-floating mb-3">
-                            <input id="floatingInput" type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="data.description">
+                            <input id="floatingInput" type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="tasks.description">
                             <label for="floatingInput" class="font-weight-bold form-label">Descrição</label>
                         </div>
                         <div class="form-group form-floating mb-3">
-                            <input id="floatingInput" type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="data.deadline">
+                            <input id="floatingInput" type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="tasks.deadline">
                             <label for="floatingInput" class="font-weight-bold form-label">Prazo de Entrega</label>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer form-group">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button @click="editar(data.attributes)" class="btn btn-primary" type="submit">Salvar</button>
+                    <button @click="editar(tasks.attributes)" class="btn btn-primary" type="submit">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
     
-
-
 
 </template>
 
@@ -72,16 +70,15 @@ export default{
     data() {
 
         return{
-            
-            data: {
-                "data": {
-                    "id": "",
+            tasks: {
+                "attributes": 
+                
+                {
                     "title": "",
                     "description": "",
                     "deadline": "",
                 }
-            }
-
+            },
         };
     },
 
@@ -94,25 +91,23 @@ export default{
             Task.listar()
             .then((response) => {
                 // this.data = JSON.stringify(response.data)
-                // console.log(response.data.data)
-                this.data = response.data.data
-                // this.title = response.data.data.attributes
-                // console.log(data)
+                this.tasks = response.data.data
+                console.log(this.tasks)
             })
             .catch(error => console.log(error))
         },
         
         editar(item){
-            Task.updateTask(item)
+            Task.updateTask(item.id,item)
             .then(response => {
-            this.data= data.data
-            console.log(response.data)
+            this.item= response.item
+            // console.log(response.data)
             })
         },
 
         clickEdit(item){
-                this.data = item
-                console.log(item)
+                this.tasks = item
+                console.log(item.title)
         },
             
 

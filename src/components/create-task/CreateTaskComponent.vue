@@ -7,15 +7,15 @@
             <div class="card-body ">
                 <form @submit.prevent="salvar">
                     <div class="form-group form-floating mb-3">
-                        <input id="floatingInput" type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="data.data.title">
+                        <input id="floatingInput" type="text" class="form-control" placeholder="Digite o título da tarefa" v-model="task.data.title">
                         <label for="floatingInput">Título</label>
                     </div>
                     <div class="form-group form-floating mb-3">
-                        <input id="floatingInput" type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="data.data.description">
+                        <input id="floatingInput" type="text" class="form-control" placeholder="Digite a descrição da tarefa" v-model="task.data.description">
                         <label for="floatingInput" class="font-weight-bold form-label">Descrição</label>
                     </div>
                     <div class="form-group form-floating mb-3">
-                        <input id="floatingInput" type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="data.data.deadline">
+                        <input id="floatingInput" type="date" class="form-control" placeholder="Digite o prazo de entrega" v-model="task.data.deadline">
                         <label for="floatingInput" class="font-weight-bold form-label">Prazo de Entrega</label>
                     </div>
                     <div class="form-group">
@@ -38,7 +38,7 @@ export default{
     },
     data() {
         return{
-            data: {
+            task: {
                 "data": {
                     "title": "",
                     "description": "",
@@ -51,14 +51,23 @@ export default{
     methods: {
 
         salvar(){
-            Task.addNewTask(this.data)
+            Task.addNewTask(this.task)
                 .then(response => {
-                })
-            Swal.fire(
-                'Adicionado!',
-                'Tarefa adicionada com sucesso!',
-                'success',
+                    Swal.fire(
+                        'Adicionado!',
+                        'Tarefa adicionada com sucesso!',
+                        'success',
             )
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Deu alguma coisa errada!',
+                        // footer: '<a href="">Why do I have this issue?</a>'
+                    })
+                })
+
         }
     },
 }

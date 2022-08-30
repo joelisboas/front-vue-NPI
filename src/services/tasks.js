@@ -2,20 +2,16 @@ import { api } from './api'
 
 export default{
 
-    listOne:(id) => {
-        return api.get('tasks/'+id)
-    },
-
     listar:() => {
         return api.get('tasks')
     },
 
-    addNewTask:(data) => {
-        return api.post('tasks', data);
+    addNewTask:(task) => {
+        return api.post('tasks', task);
     },
 
-    updateTask:(item) => {
-        return api.put('tasks/', item);
+    updateTask:(id, item) => {
+        return api.put('tasks/'+id, item);
     },
 
     deleteTask:(id) => {
